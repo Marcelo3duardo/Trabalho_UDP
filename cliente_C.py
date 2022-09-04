@@ -3,11 +3,11 @@ import socket
 
 HOST = '192.168.15.11' #'192.168.26.28' #'192.168.15.8'
 PORT = 5002
-PORT_MYC = 5003
+PORT_MYC = 5040
 
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-udp.bind((HOST, PORT_MYC))
+udp.bind((HOST,PORT_MYC))
 #udp.bind((HOST, PORT)) #função para ficar escutando 
 #udp.connect((HOST, PORT))
 udp.sendto(bytes('iniciando c',"utf-8"),(HOST, PORT))
