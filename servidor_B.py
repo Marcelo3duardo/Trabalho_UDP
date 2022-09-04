@@ -28,7 +28,7 @@ while True:
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
             elif cont:        
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
-        contIndic += 1
+        contIndic += 0.5
     cont = not cont
 
     
