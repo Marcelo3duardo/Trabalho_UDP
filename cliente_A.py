@@ -1,11 +1,18 @@
 import socket
-import time
+from time import sleep
+import select
+import sys
 
 #globais
-HOST = '192.168.26.28'
-PORT = 5005
+HOST = '192.168.15.11' #'192.168.26.28'
+PORT = 5002
+PORT_MYA = 5001
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-udp.settimeout(2)
+
+socket.setdefaulttimeout(4)
+udp.settimeout(4)
+#udp.setblocking(True) #nao deixa entrar no estado bloqueado
+udp.bind((HOST, PORT_MYA))
 
 def cliente_A():
     #HOST = '192.168.26.28'
@@ -22,7 +29,7 @@ def cliente_A():
         else:
             mensagem = '1|'
             alter = 0
-            
+        
         mensagem += input('digite a mensagem : ')
         print(mensagem)
         
@@ -32,25 +39,50 @@ def cliente_A():
         
         #rodar em paralelo async
         ack_r = False
+        timeInSec = 2
+        
+        udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
         while not ack_r:
-            #envio
-            udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
-            time_init = time.time()
+           
+            
+            
+            
             try:
                 mensagemVoltou, endereço_cliente = udp.recvfrom(1024)
+                #leu = select.select([udp.recvfrom(1024)],[],[],timeInSec)
             except socket.timeout:
-                print("Timeout")
+                print('timeout ----')
+                sleep(1)
+                udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
+                print('-> confirm')
             else:
-                print('mensagem ->', mensagemVoltou.decode('utf-8'))
+                print('mensagem ', mensagemVoltou.decode('utf-8'))
                 ack_r = True
+            #envio
+            '''udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
 
+            try:
+                print('teste entrou no try')
+                retorno = udp.recvfrom(1024)
+                #mensagemVoltou, endereço_cliente = udp.recvfrom(1024)
+                print('mensagem no try ->', retorno[0].decode('utf-8'))
+            except socket.timeout:
+                
+                print("Timeout ",socket.timeout)
+                udp.close()
+            else:
+                
+                print('mensagem ->', retorno[0].decode('utf-8'))
+                ack_r = True'''
+                
+            #udp.settimeout(2)
         #mensagemconfirm, endereço_cliente = udp.recvfrom(1024)
 
         #print('Mensagem Recebida:---> ',mensagemVoltou.decode('utf-8'))
         #print('confirmação de mensagem:',mensagemconfirm.decode('utf-8'))
-        if mensagem[2] == '&' :
+            if mensagem[2] == '&' :
                 break
-    udp.close()
+    
 
 
 
