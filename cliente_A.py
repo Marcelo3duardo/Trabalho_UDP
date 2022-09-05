@@ -82,7 +82,7 @@ def cliente_A():
 
         #print('Mensagem Recebida:---> ',mensagemVoltou.decode('utf-8'))
         #print('confirmação de mensagem:',mensagemconfirm.decode('utf-8'))
-            if mensagem[2] == '&' :
+            if mensagem[2] == '&':
                 break
     
 

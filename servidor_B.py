@@ -9,27 +9,35 @@ udp.bind((HOST, PORT))
 print ('Aguardando conexão ')
 lista_port_cliente = set()
 cont = False
+aux = 0
 while True:
     mensagem, endereço_cliente = udp.recvfrom(1024)         #recebe
     #print('Cliente -> ',endereço_cliente )
     print(endereço_cliente,' ->  ',mensagem.decode('utf-8'))
     lista_port_cliente.add(endereço_cliente)
     #print('lista das portas cliente ->',lista_port_cliente)
-    contIndic = 0
+
     for ips in lista_port_cliente:
         #print('ipList: ',ips,'  ipAtua ->',endereço_cliente)
         if ips != endereço_cliente:
             #mandar a mensagem
-            print('entrou no if ->>>',ips )
+            print('entrou no if ->>>',type(ips) )
             #print('tipo ip ',type(ips[0]),'tipo host  ',type(ips[1]), 'tipo msg  ', type(mensagem))
             mensagem = mensagem.decode('utf-8')
-            print('s---> ',type(mensagem),'  ',mensagem)
-            if contIndic == 0: #tupla n recebe index
+            print('s---> ',mensagem)
+            if cont: #tupla n recebe index
+                print('enviando +++++++++++++++ ')
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
-            elif cont:        
-                udp.sendto(bytes(mensagem,'utf-8'),(ips))
-        contIndic += 0.5
-    cont = not cont
+            else:
+                print('n enviou ---------------')
+    aux += 1
+    if aux % 2 == 0:
+        cont = not cont
+
+
+
+
+
 
     
            

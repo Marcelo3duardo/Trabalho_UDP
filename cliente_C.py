@@ -3,7 +3,7 @@ import socket
 
 HOST = '192.168.15.11' #'192.168.26.28' #'192.168.15.8'
 PORT = 5002
-PORT_MYC = 5040
+PORT_MYC = 9050
 
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
