@@ -1,11 +1,11 @@
 import socket
 
-HOST =  '' #'192.168.26.28'   # 192.168.15.8'
+HOST =  '' 
 PORT = 5002
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # esta usando tcp
 udp.bind((HOST, PORT))
-#udp.listen()
+
 print ('Aguardando conexão ')
 lista_port_cliente = set()
 cont = False
@@ -20,12 +20,10 @@ while True:
     for ips in lista_port_cliente:
         #print('ipList: ',ips,'  ipAtua ->',endereço_cliente)
         if ips != endereço_cliente:
-            #mandar a mensagem
             print('entrou no if ->>>',type(ips) )
-            #print('tipo ip ',type(ips[0]),'tipo host  ',type(ips[1]), 'tipo msg  ', type(mensagem))
             mensagem = mensagem.decode('utf-8')
             print('s---> ',mensagem)
-            if cont: #tupla n recebe index
+            if cont: 
                 print('enviando +++++++++++++++ ')
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
             else:

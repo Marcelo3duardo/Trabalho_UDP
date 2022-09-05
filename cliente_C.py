@@ -8,8 +8,7 @@ PORT_MYC = 9050
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 udp.bind((HOST,PORT_MYC))
-#udp.bind((HOST, PORT)) #função para ficar escutando 
-#udp.connect((HOST, PORT))
+
 udp.sendto(bytes('iniciando c',"utf-8"),(HOST, PORT))
 print(HOST)
 while True:
@@ -25,9 +24,7 @@ while True:
     
     #udp.sendto(bytes(mensagemR,"utf-8"),(HOST, PORT) )
     udp.sendto(bytes(confirm,"utf-8"),(HOST, PORT) )
-     
-    
-   
+
     #print('Mensagem Recebida:---> ',mensagemRecebida)
     if mensagemR[0] == '&' :
             break

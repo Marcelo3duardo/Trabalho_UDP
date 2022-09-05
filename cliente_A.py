@@ -15,10 +15,7 @@ udp.settimeout(4)
 udp.bind((HOST, PORT_MYA))
 
 def cliente_A():
-    #HOST = '192.168.26.28'
-    #PORT = 5005
-
-    #udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+   
     alter = 0
     #udp.connect((HOST, PORT))
     while True:
@@ -33,8 +30,6 @@ def cliente_A():
         mensagem += input('digite a mensagem : ')
         print(mensagem)
         
-       
-            
         mensagem = str(mensagem)
         
         #rodar em paralelo async
@@ -43,10 +38,8 @@ def cliente_A():
         
         udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
         while not ack_r:
-           
-            
-            
-            
+     
+                    
             try:
                 print('try ---')
                 mensagemVoltou, endereço_cliente = udp.recvfrom(1024)
@@ -60,28 +53,8 @@ def cliente_A():
             else:
                 print('mensagem ', mensagemVoltou.decode('utf-8'))
                 ack_r = True
-            #envio
-            '''udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
-
-            try:
-                print('teste entrou no try')
-                retorno = udp.recvfrom(1024)
-                #mensagemVoltou, endereço_cliente = udp.recvfrom(1024)
-                print('mensagem no try ->', retorno[0].decode('utf-8'))
-            except socket.timeout:
                 
-                print("Timeout ",socket.timeout)
-                udp.close()
-            else:
                 
-                print('mensagem ->', retorno[0].decode('utf-8'))
-                ack_r = True'''
-                
-            #udp.settimeout(2)
-        #mensagemconfirm, endereço_cliente = udp.recvfrom(1024)
-
-        #print('Mensagem Recebida:---> ',mensagemVoltou.decode('utf-8'))
-        #print('confirmação de mensagem:',mensagemconfirm.decode('utf-8'))
             if mensagem[2] == '&':
                 break
     
