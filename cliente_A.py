@@ -1,14 +1,14 @@
+from asyncio.windows_events import NULL
 import socket
 from time import sleep
 import select
 import sys
 
 #globais
-HOST = '192.168.43.28' #'192.168.26.28'
+HOST = '192.168.15.8' #'192.168.26.28'
 PORT = 5002
 PORT_MYA = 5001
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
 socket.setdefaulttimeout(4)
 udp.settimeout(4)
 #udp.setblocking(True) #nao deixa entrar no estado bloqueado
@@ -27,22 +27,20 @@ def cliente_A():
             Ack = '1|'
             alter = 0
         
-        k = 1024/4
-       
-        
+
         mensagemInput = input('digite a mensagem : ')
         
-        checkS = str(findChecksum(mensagem,k))
-        mensagem += (Ack,checkS,'|', mensagemInput)
+        checkS = findChecksum(mensagemInput)
+        # juntando Ack, checkSum, mensagem
+        mensagem = (Ack + checkS + '|' + mensagemInput)
         
         print(mensagem)
         
            
         mensagem = str(mensagem)
         
-        #rodar em paralelo async
         ack_r = False
-        timeInSec = 2
+        
         
         udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
         while not ack_r:
@@ -71,34 +69,37 @@ def cliente_A():
 
 
 
-def findChecksum(mensagem, k):
+def findChecksum(mensagem):
     
     # Dividindo a mensagem em 4 pacotes de K bits
-    c1 = mensagem[0:k]
-    c2 = mensagem[k:2*k]
-    c3 = mensagem[2*k:3*k]
-    c4 = mensagem[3*k:4*k]
+   
+    # Convertendo em binário
+    binary_converted = ' '.join(map(bin, bytearray(mensagem, "utf-8")))
+    # transformar em lista 
+    #print('mensagem --> ',mensagem)
+    # Transformando em lista para poder somar 
+    list_binary_converted = binary_converted.split(' ')
+    print ('valor em binário -->',type(binary_converted),' ---',binary_converted)
+    # Somando tudo
+    checksumV = somaBinaria(list_binary_converted)
+    print ('valor da soma binária -->',checksumV)
+    return checksumV
 
-    # Calculando a soma binaria dos pacotes
-    Sum = bin(int(c1, 2)+int(c2, 2)+int(c3, 2)+int(c4, 2))[2:]
-
-    # Adding the overflow bits
-    if(len(Sum) > k):
-        x = len(Sum)-k
-        Sum = bin(int(Sum[0:x], 2)+int(Sum[x:], 2))[2:]
-    if(len(Sum) < k):
-        Sum = '0'*(k-len(Sum))+Sum
-
-    # Calculating the complement of sum
-    Checksum = ''
-    for i in Sum:
-        if(i == '1'):
-            Checksum += '0'
+def somaBinaria(lista_binaria):
+    soma = "0"
+    for bit in range(len(lista_binaria)):
+        soma = bin(int(soma,2) + int(lista_binaria[bit],2))
+    print('Valor da soma ->',soma)
+    # inverter somatório
+    checkSum = ''
+    strSoma = str(soma[2:])
+    for caracDsoma in range(len(strSoma)):
+        if strSoma[caracDsoma] == '1':
+            checkSum += "0"
         else:
-            Checksum += '1'
-        return Checksum
+            checkSum += "1"
+    print('checkSumF -->',checkSum)
     
-    return Checksum
-    #mensagem = [str(mensagem), Checksum]
+    return checkSum
     
 cliente_A()
