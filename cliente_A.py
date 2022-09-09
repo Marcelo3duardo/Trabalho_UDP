@@ -47,10 +47,10 @@ def cliente_A():
      
                     
             try:
-                print('try ---')
+                
                 mensagemVoltou, endereço_cliente = udp.recvfrom(1024)
                 #leu = select.select([udp.recvfrom(1024)],[],[],timeInSec)
-                print('try +++')
+             
             except socket.timeout:
                 print('timeout ')
                 sleep(1)
