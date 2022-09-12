@@ -1,7 +1,7 @@
 
 import socket
 
-HOST = '192.168.15.8' #'192.168.26.28' #'192.168.15.8'
+HOST = '192.168.15.8' 
 PORT = 5002
 PORT_MYC = 9050
 
@@ -21,7 +21,6 @@ def cliente_C():
         
         mensagemR, endereço_cliente = udp.recvfrom(1024) 
         
-        #mensagem = input('digite a mensagem : ')
         mensagemR = mensagemR.decode('utf-8')
         aux = mensagemR.split('|')
         confirm = aux[0]    #Ack
@@ -42,12 +41,8 @@ def cliente_C():
             else:
                 confirm = '0'    
             udp.sendto(bytes(confirm,"utf-8"),(HOST, PORT) ) 
-        #udp.sendto(bytes(mensagemR,"utf-8"),(HOST, PORT) )
-        #udp.sendto(bytes(confirm,"utf-8"),(HOST, PORT) )
-
-        #print('Mensagem Recebida:---> ',mensagemRecebida)
-        if mensagemR[0] == '&' :
-                break
+        
+        
     udp.close()
 
 

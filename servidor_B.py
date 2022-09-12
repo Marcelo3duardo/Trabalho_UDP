@@ -55,21 +55,16 @@ def teste_timeout():
         if aux % 2 == 0:
             cont = not cont
    
-        strMensagem = str(mensagem)
-        if strMensagem[0] == '&':
-            break
-        
-    udp.close()
     
 def padrao():
     
     print ('Aguardando conexão ')
     while True:
         mensagem, endereço_cliente = udp.recvfrom(1024)         #recebe
-        #print('Cliente -> ',endereço_cliente )
+        
         print(endereço_cliente,' ->  ',mensagem.decode('utf-8'))
         lista_port_cliente.add(endereço_cliente)
-        #print('lista das portas cliente ->',lista_port_cliente)
+        
 
         for ips in lista_port_cliente:
             #print('ipList: ',ips,'  ipAtua ->',endereço_cliente)
@@ -79,10 +74,7 @@ def padrao():
                 print('s---> ',mensagem)
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
        
-        strMensagem = str(mensagem)
-        if strMensagem[0] == '&':
-            break
-
+        
 
         
     udp.close()
@@ -109,13 +101,9 @@ def teste_Checksum():
                     mensagem =  mensagemDiv[0] + '|' + mensagemDiv[1] + '|' +  corrompe 
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
        
-        strMensagem = str(mensagem)
-        if strMensagem[0] == '&':
-            break
-
-
         
-    udp.close()
+
+
 
 def teste_Ack():
     
@@ -142,12 +130,7 @@ def teste_Ack():
                     mensagem =  corrompeAck + '|' + mensagemDiv[1] + '|' +  mensagemDiv[2] 
                 udp.sendto(bytes(mensagem,'utf-8'),(ips))
        
-        strMensagem = str(mensagem)
-        if strMensagem[0] == '&':
-            break
-
-
         
-    udp.close()
+       
     
 servidor_B()

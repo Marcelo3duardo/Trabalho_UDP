@@ -17,9 +17,9 @@ udp.bind((HOST, PORT_MYA))
 def cliente_A():
    
     Ack = '0'
-    #udp.connect((HOST, PORT))
+    
     while True:
-        #mensagemVoltou = bytes('!',"utf-8")
+        
         
 
         mensagemInput = input('digite a mensagem : ')
@@ -47,16 +47,16 @@ def cliente_A():
             try:
                 print("estado 2")
                 mensagemVoltou, endereço_cliente = udp.recvfrom(1024)
-                #leu = select.select([udp.recvfrom(1024)],[],[],timeInSec)
+                
              
             except socket.timeout:
                 print('timeout ')
                 sleep(1)
-                #udp.sendto(bytes(mensagem,"utf-8"),(HOST, PORT))
+                
                 
             else:
                 print('mensagem ', mensagemVoltou.decode('utf-8'))
-                #ack_r = True
+                
             
                 if mensagemVoltou.decode('utf-8') == Ack:
                     #esta certo
@@ -68,12 +68,8 @@ def cliente_A():
                         Ack = '0'
                         
                 
-            if mensagem[2] == '&':
-                break
+           
     
-
-
-
 
 
 def findChecksum(mensagem):
@@ -102,7 +98,7 @@ def somaBinaria(lista_binaria):
         strSoma = "0" + strSoma
 
     if (len(strSoma) > 16):
-        # retirar o bit mais a esquerda
+        
         strSoma = strSoma[(len(strSoma) - 16):]
     
 
