@@ -6,13 +6,14 @@ import sys
 
 #globais
 HOST = '192.168.15.4' #'192.168.26.28'
+HOSTLOCAL = ''
 PORT = 5002
 PORT_MYA = 5001
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 socket.setdefaulttimeout(4)
 udp.settimeout(4)
 #udp.setblocking(True) #nao deixa entrar no estado bloqueado
-udp.bind((HOST, PORT_MYA))
+udp.bind((HOSTLOCAL, PORT_MYA))
 
 def cliente_A():
 

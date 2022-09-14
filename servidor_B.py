@@ -1,7 +1,7 @@
 import socket
 from traceback import print_tb
 
-HOST =  '' 
+HOST = ''
 PORT = 5002
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # esta usando tcp

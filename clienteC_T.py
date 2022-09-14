@@ -1,13 +1,14 @@
 
 import socket
 
-HOST = '192.168.15.4'
+HOST = '192.168.225.186'
+HOSTLOCAL = ''
 PORT = 5002
 PORT_MYC = 9050
 
 
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-udp.bind((HOST,PORT_MYC))
+udp.bind((HOSTLOCAL, PORT_MYC))
 
 def cliente_C():
     udp.sendto(bytes('iniciando c',"utf-8"),(HOST, PORT))

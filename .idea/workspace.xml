@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80f54694-bd95-4bce-9f0c-d4bcaab6192d" name="Changes" comment="">
+    <list default="true" id="80f54694-bd95-4bce-9f0c-d4bcaab6192d" name="Changes" comment="checksum e perda de conexao">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clienteA_T.py" beforeDir="false" afterPath="$PROJECT_DIR$/clienteA_T.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/clienteC_T.py" beforeDir="false" afterPath="$PROJECT_DIR$/clienteC_T.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servidor_B.py" beforeDir="false" afterPath="$PROJECT_DIR$/servidor_B.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +33,7 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/fmarc/OneDrive/Documents/UFPI/UFPI_2022.1/teoria/trabalho 01&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.clienteA_T">
+  <component name="RunManager" selected="Python.servidor_B">
     <configuration name="clienteA_T" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Trabalho_UDP" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,9 +141,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.clienteA_T" />
-        <item itemvalue="Python.clienteC_T" />
         <item itemvalue="Python.servidor_B" />
+        <item itemvalue="Python.clienteC_T" />
+        <item itemvalue="Python.clienteA_T" />
         <item itemvalue="Python.cliente_C" />
         <item itemvalue="Python.cliente_A" />
       </list>
@@ -157,6 +158,14 @@
       <option name="presentableId" value="Default" />
       <updated>1661540725583</updated>
     </task>
+    <task id="LOCAL-00001" summary="checksum e perda de conexao">
+      <created>1663122528239</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1663122528239</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,15 +179,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/clienteA_T.py</url>
-          <line>100</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="checksum e perda de conexao" />
+    <option name="LAST_COMMIT_MESSAGE" value="checksum e perda de conexao" />
   </component>
 </project>
