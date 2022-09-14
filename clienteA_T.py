@@ -5,7 +5,7 @@ import select
 import sys
 
 #globais
-HOST = '192.168.15.8' #'192.168.26.28'
+HOST = '192.168.15.4' #'192.168.26.28'
 PORT = 5002
 PORT_MYA = 5001
 udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -15,12 +15,13 @@ udp.settimeout(4)
 udp.bind((HOST, PORT_MYA))
 
 def cliente_A():
-   
+
     Ack = '0'
     
     while True:
-        
-        
+        estTimeout = 0
+        estCorrupcao = 0
+
 
         mensagemInput = input('digite a mensagem : ')
         
@@ -52,7 +53,7 @@ def cliente_A():
             except socket.timeout:
                 print('timeout ')
                 sleep(1)
-                
+                estTimeout += 1
                 
             else:
                 print('mensagem ', mensagemVoltou.decode('utf-8'))
@@ -66,7 +67,14 @@ def cliente_A():
                         Ack = '1'
                     else:
                         Ack = '0'
-                        
+                else:
+                    #ack errado
+                    estCorrupcao += 1
+
+            if estCorrupcao > 50 or estTimeout > 25:
+                print("conecxão perdida ")
+                ack_r = True
+
                 
            
     
@@ -89,18 +97,22 @@ def findChecksum(mensagem):
 def somaBinaria(lista_binaria):
     soma = "0"
     for bit in range(len(lista_binaria)):
-        soma = bin(int(soma,2) + int(lista_binaria[bit],2)) #
-    
+        soma = bin(int(soma,2) + int(lista_binaria[bit],2))
+        while len(soma) > 18:
+            soma = soma[0:2] + soma[3:len(soma)]
+            soma = bin(int(soma,2) + int(1))
+
+    print('soma->>', soma)
     # Inverter somatório
     checkSum = ''
     strSoma = str(soma[2:])
     while (len(strSoma) < 16):
         strSoma = "0" + strSoma
-
+    '''
     if (len(strSoma) > 16):
         
         strSoma = strSoma[(len(strSoma) - 16):]
-    
+'''
 
     for caracDsoma in range(len(strSoma)):
         if strSoma[caracDsoma] == '1':

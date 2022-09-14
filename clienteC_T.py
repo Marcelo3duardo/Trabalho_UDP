@@ -1,7 +1,7 @@
 
 import socket
 
-HOST = '192.168.15.8' 
+HOST = '192.168.15.4'
 PORT = 5002
 PORT_MYC = 9050
 
@@ -69,16 +69,19 @@ def findChecksum(mensagem,checkSumR):
 def somaBinaria(lista_binaria):
     soma = "0"
     for bit in range(len(lista_binaria)):
-        soma = bin(int(soma,2) + int(lista_binaria[bit],2))
+        soma = bin(int(soma, 2) + int(lista_binaria[bit], 2))
+        while len(soma) > 18:
+            soma = soma[0:2] + soma[3:len(soma)]
+            soma = bin(int(soma, 2) + int(1))
 
     # Salva o resultado da soma
     checkSum = str(soma[2:])
     while (len(checkSum) < 16):
         checkSum = "0" + checkSum
     
-    if (len(checkSum) > 16):
+    '''if (len(checkSum) > 16):
         # retirar o bit mais a esquerda
-        checkSum = checkSum[(len(checkSum) - 16):]
+        checkSum = checkSum[(len(checkSum) - 16):]'''
     
     
     return checkSum
